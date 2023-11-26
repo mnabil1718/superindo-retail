@@ -122,11 +122,13 @@ export async function getProducts(): Promise<Product[]> {
       `${process.env.NEXT_PUBLIC_HOSTNAME_URL}/api/products`,
       {
         method: "GET",
+        next: {
+          revalidate: 5,
+        },
       }
     );
     const data = await response.json();
-    const products = await data.products;
-    return products;
+    return data.products;
   } catch (error) {
     console.log(error);
     return [];

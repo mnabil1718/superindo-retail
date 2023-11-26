@@ -8,18 +8,10 @@ import {
 } from "@/components/ui/card";
 import { Category, Product } from "@/lib/data";
 import Link from "next/link";
-
-async function getCategory(id: number): Promise<Category> {
-  const response = await fetch(`http://localhost:3000/api/categories/${id}`, {
-    method: "GET",
-  });
-  const data = await response.json();
-
-  return data.category;
-}
+import { getCategory } from "@/lib/fetches";
 
 export async function ProductCard({ product }: { product: Product }) {
-  const category = await getCategory(product.category_id);
+  const category = await getCategory(product.category_id.toString());
   return (
     <Link href={`/products/${product.slug}`}>
       <Card className="group hover:border-blue-500 transition duration-200">
@@ -34,7 +26,7 @@ export async function ProductCard({ product }: { product: Product }) {
         </CardContent>
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
-          <CardDescription>{category.name}</CardDescription>
+          <CardDescription>{category?.name}</CardDescription>
         </CardHeader>
       </Card>
     </Link>

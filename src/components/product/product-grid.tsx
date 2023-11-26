@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/product/product-card";
-import { Product, products } from "@/lib/data";
+import { Product } from "@/lib/data";
 import { getProducts } from "@/lib/fetches";
 
 const ProductGrid = async () => {
